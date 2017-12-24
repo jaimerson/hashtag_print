@@ -1,26 +1,27 @@
 require 'prawn'
-require 'open-uri'
 
 # Renders a HashtagPrint::Document to a PDF with the given file name.
 module HashtagPrint
   class Renderer
-    attr_reader :document, :output_path
+    def self.render(document)
+      path = output_path(document.image_digest)
 
-    # @param document [HashtagPrint::Document] the document to render
-    # @param file_name [String] name of file to be saved
-    def initialize(document, file_name)
-      @document = document
-      @output_path = HashtagPrint::ROOT_PATH.join('output', file_name, '.pdf')
-    end
+      Prawn::Document.generate(path) do
+        font_families.update({
+          'QuattrocentoSans' => {
+            normal: 'fonts/QuattrocentoSans-Regular.ttf',
+            bold: 'fonts/Quattrocento-Bold.ttf'
+          }
+        })
 
-    def render
-      Prawn::Document.generate(output_path) do
-        setup_font
-        inside_box do
+        bounding_box([0, cursor], width: 550, height: 730) do
+          transparent(1, 0.3) do
+            stroke_bounds
+          end
+
           font_size 16
-          move_down 20
 
-          image open(document.image_url), position: :center, fit: [450, 450]
+          image document.image, position: :center, fit: [550, 475]
 
           indent(20) do
             move_down 20
@@ -36,26 +37,14 @@ module HashtagPrint
           end
         end
       end
+
+      path
     end
 
     private
 
-    def setup_font
-      font_families.update({
-        'QuattrocentoSans' => {
-          normal: 'fonts/QuattrocentoSans-Regular.ttf',
-          bold: 'fonts/Quattrocento-Bold.ttf'
-        }
-      })
-    end
-
-    def inside_box
-      bounding_box([20, cursor], width: 500, height: 600) do
-        transparent(1, 0.3) do
-          stroke_bounds
-        end
-        yield
-      end
+    def self.output_path(filename)
+      File.join(HashtagPrint::ROOT_PATH, 'output', filename).to_s + '.pdf'
     end
   end
 end

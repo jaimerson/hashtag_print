@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require_relative '../lib/hashtag_print'
+
+HashtagPrint::Listener.new('casamentorosaejames').listen

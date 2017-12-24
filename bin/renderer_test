@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+require_relative '../lib/hashtag_print'
+
+document = HashtagPrint::Document.new(
+  user_name: '@johndoe',
+  image_url: 'http://lorempixel.com/600/600/cats',
+  caption: 'Nice #party @man #cool #dance #bitchesDontKnowBoutMySpideylight'
+)
+
+HashtagPrint::Renderer.render(document)
