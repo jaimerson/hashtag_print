@@ -2,9 +2,9 @@
 require_relative '../lib/hashtag_print'
 
 document = HashtagPrint::Document.new(
-  user_name: '@johndoe',
-  image_url: 'http://lorempixel.com/600/600/cats',
-  caption: 'Nice #party @man #cool #dance #bitchesDontKnowBoutMySpideylight'
+  user_name: '@jaimersonn',
+  image_url: 'https://farm5.staticflickr.com/4365/35674676053_320b556d00_b.jpg',
+  caption: 'Essa linda @rosanyaazevedo #couple #beautiful #casamentorosaejames'
 )
 
 HashtagPrint::Renderer.render(document)
