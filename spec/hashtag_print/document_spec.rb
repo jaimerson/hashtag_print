@@ -60,7 +60,7 @@ RSpec.describe HashtagPrint::Document do
       end
 
       it 'gets trimmed' do
-        expect(formatted_caption.length).to eq(301)
+        expect(formatted_caption.length).to eq(251)
       end
     end
   end

@@ -13,5 +13,6 @@ end
 
 require 'hashtag_print/document'
 require 'hashtag_print/instagram'
+require 'hashtag_print/image'
 require 'hashtag_print/renderer'
 require 'hashtag_print/listener'

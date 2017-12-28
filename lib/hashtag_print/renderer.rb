@@ -20,18 +20,18 @@ module HashtagPrint
             stroke_bounds
           end
 
-          font_size 16
+          font_size 12
 
           image document.image, position: :center, fit: [95.mm, 95.mm]
 
           indent(2.mm) do
-            move_down 5.mm
+            move_down 2.mm
 
             font('QuattrocentoSans', style: :bold) do
               text document.user_name, color: 'F03030'
             end
 
-            move_down 5.mm
+            move_down 2.mm
 
             font 'QuattrocentoSans'
             text document.formatted_caption, inline_format: true

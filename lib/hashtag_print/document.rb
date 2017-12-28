@@ -1,4 +1,3 @@
-require 'open-uri'
 require 'digest/md5'
 
 module HashtagPrint
@@ -17,15 +16,15 @@ module HashtagPrint
     end
 
     def image
-      open(image_url)
+      decorated_image.crop_centered
     end
 
     def image_digest
-      Digest::MD5.hexdigest(image.read)
+      decorated_image.signature
     end
 
     def formatted_caption
-      caption[0..300].split(HASHTAG_OR_MENTION_REGEX).map do |part|
+      caption[0..250].split(HASHTAG_OR_MENTION_REGEX).map do |part|
         part = strong(part) if part =~ HASHTAG_REGEX
         part = color(strong(part)) if part =~ MENTION_REGEX
         part
@@ -33,6 +32,10 @@ module HashtagPrint
     end
 
     private
+
+    def decorated_image
+      HashtagPrint::Image.new(image_url)
+    end
 
     def strong(string)
       "<strong>#{string}</strong>"
