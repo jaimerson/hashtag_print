@@ -31,11 +31,13 @@ module HashtagPrint
     def printed?(document)
       in_log = File.readlines(printed).map(&:strip).include?(document.image_digest)
       puts "Skipping already printed document" if in_log
+      in_log
     end
 
     def downloaded?(document)
       in_log = File.readlines(downloaded).map(&:strip).include?(document.image_digest)
       puts "Skipping already downloaded document" if in_log
+      in_log
     end
 
     def downloaded
