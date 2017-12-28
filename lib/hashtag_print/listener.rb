@@ -4,7 +4,7 @@ module HashtagPrint
   class Listener
     attr_reader :hashtag, :interval
 
-    DEFAULT_INTERVAL = 3600 # seconds
+    DEFAULT_INTERVAL = 60 # seconds
     LIMIT_PER_USER   = 5  # pictures
 
     def initialize(hashtag, interval: DEFAULT_INTERVAL)
