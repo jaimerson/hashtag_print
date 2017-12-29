@@ -17,7 +17,7 @@ module HashtagPrint
 
       loop do
         client.search_by_hashtag(hashtag)
-          .reject { |d| printed?(d) }
+          .reject { |d| downloaded?(d) }
           .map { |d| save_to_pdf(d) }
           .reject { |d, _| printed?(d) || reached_limit_per_user?(d) }
           .map { |d, path| print(d, path) }
@@ -29,6 +29,7 @@ module HashtagPrint
     private
 
     def reached_limit_per_user?(document)
+      return if %w[@jaimersonn @rosanyaazevedo].include?(document.user_name)
       printed_per_user = YAML.load_file(printed_per_user_path) || {}
       reached_limit = printed_per_user[document.user_name].to_i >= LIMIT_PER_USER
 

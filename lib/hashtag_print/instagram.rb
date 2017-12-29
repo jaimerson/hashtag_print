@@ -38,7 +38,7 @@ module HashtagPrint
       result = yield
       @retries = 0
       result
-    rescue Watir::Exception::Error
+    rescue Watir::Exception::Error, Net::ReadTimeout
       reset_browser && retry if (@retries += 1) < 5
     end
 
